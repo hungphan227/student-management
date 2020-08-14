@@ -14,7 +14,6 @@ export default {
   name: "f-function-list",
   methods: {
     accessInnerPage () {
-      console.log('goto')
       this.$router.push('student')
     }
   }
