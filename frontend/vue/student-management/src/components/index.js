@@ -1,7 +1,7 @@
-import HelloWorld from "./HelloWorld"
 import FunctionList from "./FunctionList"
 import Student from "./Student"
 import Popup from "./Popup";
 import CreateStudent from "./CreateStudent";
+import EditStudent from "./EditStudent";
 
-export { HelloWorld, FunctionList, Student, Popup, CreateStudent }
+export { FunctionList, Student, Popup, CreateStudent, EditStudent }

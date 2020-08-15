@@ -36,7 +36,7 @@ public class StudentController {
     }
 
     // Save or update
-    @PutMapping("/students/{id}")
+    @PutMapping("/student/{id}")
     Student saveOrUpdate(@RequestBody Student newStudent, @PathVariable Long id) {
 
         return repository.findById(id)

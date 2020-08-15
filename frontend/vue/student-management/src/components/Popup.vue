@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal id="modal-1">
+    <b-modal ref="my-modal" v-on:hide="afterHidePopup">
       <template v-slot:modal-header="{}">
         <slot name="header">
         </slot>
@@ -29,34 +29,28 @@
 export default {
   name: 'f-popup',
   props: {
-    show: false,
-    afterConfirmPopup: {
-      type: Function,
-      required: true
-    },
-    afterClosePopup: {
-      type: Function,
-      required: true
-    },
+    show: false
   },
   watch: {
     show: function (val) {
       if (val) {
-        this.$bvModal.show('modal-1')
+        this.$refs['my-modal'].show()
+        this.$emit('open-popup')
       } else {
-        this.$bvModal.hide('modal-1')
+        this.$refs['my-modal'].hide()
       }
     }
   },
   methods: {
     confirm () {
       this.$emit('confirm-popup')
-      this.afterConfirmPopup()
       this.closePopup()
     },
     closePopup () {
-      this.$bvModal.hide('modal-1')
-      this.afterClosePopup()
+      this.$refs['my-modal'].hide()
+    },
+    afterHidePopup() {
+      this.$emit('close-popup')
     }
   }
 }

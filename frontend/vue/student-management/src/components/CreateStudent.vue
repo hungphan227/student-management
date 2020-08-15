@@ -1,5 +1,5 @@
 <template>
-  <f-popup v-on:confirm-popup="confirmCreatingStudent" v-bind:show="showPopup" v-bind:after-confirm-popup="afterConfirmPopup" v-bind:after-close-popup="afterClosePopup">
+  <f-popup v-on:confirm-popup="confirmStudent" v-on:close-popup="afterClosePopup" v-bind:show="showPopup"  v-bind:after-close-popup="afterClosePopup">
     <div slot="header">
       <h5>Create Student</h5>
     </div>
@@ -27,6 +27,7 @@ export default {
   data () {
     return {
       student: {
+        id: 0,
         name: '',
         age: ''
       }
@@ -35,10 +36,7 @@ export default {
   watch: {
   },
   methods: {
-    confirmCreatingStudent () {
-      console.log('triggered by event confirm-popup')
-    },
-    afterConfirmPopup () {
+    confirmStudent () {
       this.$store.dispatch('addStudent', this.student)
     },
     afterClosePopup () {

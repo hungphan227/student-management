@@ -17,4 +17,7 @@ export default class {
   createStudent (student, onSuccess, onError) {
     return Vue.http.post('/student', student).then(onSuccess, onError)
   }
+  editStudent (student, onSuccess, onError) {
+    return Vue.http.put('/student/'+student.id, student).then(onSuccess, onError)
+  }
 }
