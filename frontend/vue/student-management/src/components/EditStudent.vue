@@ -1,7 +1,7 @@
 <template>
-  <f-popup v-on:confirm-popup="confirmStudent" v-on:open-popup="afterOpenPopup" v-on:close-popup="afterClosePopup" v-bind:show="showPopup" v-bind:after-close-popup="afterClosePopup">
+  <f-popup v-on:confirm-popup="confirmStudent" v-on:open-popup="afterOpenPopup" v-bind:sync-data-of-components="syncDataOfComponents">
     <div slot="header">
-      <h5>Edit Student {{student.id}}</h5>
+      <h5>Edit student {{student.id}}</h5>
     </div>
     <div slot="body">
       <b-form-group id="edit-group-1" label="Name:" label-for="edit-1">
@@ -18,7 +18,9 @@
 export default {
   name: "f-edit-student",
   props: {
-    showPopup: false,
+    syncDataOfComponents: {
+      showPopup: false
+    },
     selectedStudent: {
       type: Object,
       required: true
@@ -26,7 +28,7 @@ export default {
     afterClosePopupEditStudent: {
       type: Function,
       required: true
-    },
+    }
   },
   data () {
     return {
@@ -43,15 +45,10 @@ export default {
   },
   methods: {
     afterOpenPopup () {
-      this.student.id = this.selectedStudent.id
-      this.student.name = this.selectedStudent.name
-      this.student.age = this.selectedStudent.age
+      this.student = Object.assign(this.student, this.selectedStudent)
     },
     confirmStudent () {
       this.$store.dispatch('editStudent', this.student)
-    },
-    afterClosePopup () {
-      this.afterClosePopupEditStudent()
     }
   }
 }

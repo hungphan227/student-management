@@ -1,5 +1,5 @@
 <template>
-  <f-popup v-on:confirm-popup="confirmStudent" v-on:close-popup="afterClosePopup" v-bind:show="showPopup"  v-bind:after-close-popup="afterClosePopup">
+  <f-popup v-on:confirm-popup="confirmStudent" v-bind:sync-data-of-components="syncDataOfComponents">
     <div slot="header">
       <h5>Create Student</h5>
     </div>
@@ -18,7 +18,9 @@
 export default {
   name: "f-create-student",
   props: {
-    showPopup: false,
+    syncDataOfComponents: {
+      showPopup: false
+    },
     afterClosePopupCreateStudent: {
       type: Function,
       required: true
@@ -30,6 +32,11 @@ export default {
         id: 0,
         name: '',
         age: ''
+      },
+      emptyStudent: {
+        id: 0,
+        name: '',
+        age: ''
       }
     }
   },
@@ -38,9 +45,8 @@ export default {
   methods: {
     confirmStudent () {
       this.$store.dispatch('addStudent', this.student)
-    },
-    afterClosePopup () {
-      this.afterClosePopupCreateStudent()
+      //this.$store.state.students.push(this.student);
+      this.student = Object.assign(this.student, this.emptyStudent)
     }
   }
 }

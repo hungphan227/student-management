@@ -29,10 +29,12 @@
 export default {
   name: 'f-popup',
   props: {
-    show: false
+    syncDataOfComponents: {
+      showPopup: false
+    }
   },
   watch: {
-    show: function (val) {
+    'syncDataOfComponents.showPopup': function (val) {
       if (val) {
         this.$refs['my-modal'].show()
         this.$emit('open-popup')
@@ -50,7 +52,7 @@ export default {
       this.$refs['my-modal'].hide()
     },
     afterHidePopup() {
-      this.$emit('close-popup')
+      this.syncDataOfComponents.showPopup = false
     }
   }
 }

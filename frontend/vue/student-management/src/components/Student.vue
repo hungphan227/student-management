@@ -6,14 +6,18 @@
     </div>
     <div style="text-align: center; margin-top: 10px">
       <b-table :items="this.$store.state.students" :fields="fields" striped responsive="sm">
-        <template v-slot:cell(edit)="row">
+        <template v-slot:cell(action)="row">
           <b-button size="sm" class="mr-2" v-on:click="popupEditStudent(row.item)">
             Edit
           </b-button>
+          <b-button size="sm" class="mr-2" v-on:click="popupDeleteStudent(row.item)">
+            Delete
+          </b-button>
         </template>
       </b-table>
-      <f-create-student v-bind:show-popup="showPopupCreateStudent" v-bind:after-close-popup-create-student="afterClosePopupCreateStudent"></f-create-student>
-      <f-edit-student v-bind:show-popup="showPopupEditStudent" v-bind:selectedStudent="selectedStudent" v-bind:after-close-popup-edit-student="afterClosePopupEditStudent"></f-edit-student>
+      <f-create-student v-bind:sync-data-of-components="syncDataWithComponentCreateStudent" v-bind:after-close-popup-create-student="afterClosePopupCreateStudent"></f-create-student>
+      <f-edit-student v-bind:sync-data-of-components="syncDataWithComponentEditStudent" v-bind:selectedStudent="selectedStudent" v-bind:after-close-popup-edit-student="afterClosePopupEditStudent"></f-edit-student>
+      <f-delete-student v-bind:sync-data-of-components="syncDataWithComponentDeleteStudent" v-bind:selectedStudent="selectedStudent"></f-delete-student>
     </div>
   </div>
 </template>
@@ -23,9 +27,18 @@ export default {
   name: 'f-student',
   data () {
     return {
+      syncDataWithComponentCreateStudent: {
+        showPopup: false
+      },
+      syncDataWithComponentEditStudent: {
+        showPopup: false
+      },
+      syncDataWithComponentDeleteStudent: {
+        showPopup: false
+      },
       showPopupCreateStudent: false,
       showPopupEditStudent: false,
-      fields: ['id', 'name', 'age', 'edit'],
+      fields: ['id', 'name', 'age', 'action'],
       selectedStudent: {
         id: 0,
         name: '',
@@ -40,17 +53,19 @@ export default {
   },
   methods: {
     popupAddStudent () {
-      this.showPopupCreateStudent = true
+      this.syncDataWithComponentCreateStudent.showPopup = true
     },
     afterClosePopupCreateStudent () {
-      this.showPopupCreateStudent = false
     },
     popupEditStudent (student) {
+      this.syncDataWithComponentEditStudent.showPopup = true
       this.selectedStudent = student
-      this.showPopupEditStudent = true
+    },
+    popupDeleteStudent (student) {
+      this.syncDataWithComponentDeleteStudent.showPopup = true
+      this.selectedStudent = student
     },
     afterClosePopupEditStudent () {
-      this.showPopupEditStudent = false
     },
     back () {
       this.$router.push('/')

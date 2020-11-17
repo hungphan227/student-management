@@ -15,7 +15,7 @@ public class StudentController {
     private StudentRepository repository;
 
     // Find
-    @GetMapping("/students")
+    @GetMapping("/student")
     List<Student> findAll() {
         return repository.findAll();
     }
@@ -29,7 +29,7 @@ public class StudentController {
     }
 
     // Find
-    @GetMapping("/students/{id}")
+    @GetMapping("/student/{id}")
     Student findOne(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found" + id));
@@ -52,7 +52,7 @@ public class StudentController {
     }
 
     // update author only
-    @PatchMapping("/students/{id}")
+    @PatchMapping("/student/{id}")
     Student patch(@RequestBody Map<String, String> update, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -74,7 +74,7 @@ public class StudentController {
 
     }
 
-    @DeleteMapping("/students/{id}")
+    @DeleteMapping("/student/{id}")
     void deleteStudent(@PathVariable Long id) {
         repository.deleteById(id);
     }

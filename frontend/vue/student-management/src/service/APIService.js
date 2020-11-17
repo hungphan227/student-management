@@ -12,12 +12,15 @@ let getCallback = function (callback) {
 
 export default class {
   getAllStudents (onSuccess, onError) {
-    return Vue.http.get('/students').then(onSuccess, onError)
+    return Vue.http.get('/student').then(onSuccess, onError)
   }
   createStudent (student, onSuccess, onError) {
     return Vue.http.post('/student', student).then(onSuccess, onError)
   }
   editStudent (student, onSuccess, onError) {
     return Vue.http.put('/student/'+student.id, student).then(onSuccess, onError)
+  }
+  deleteStudent (studentId, onSuccess, onError) {
+    return Vue.http.delete('/student/'+studentId).then(onSuccess, onError)
   }
 }
