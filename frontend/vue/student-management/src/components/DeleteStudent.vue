@@ -1,5 +1,5 @@
 <template>
-  <f-popup v-on:confirm-popup="confirmStudent" v-on:open-popup="afterOpenPopup" v-bind:sync-data-of-components="syncDataOfComponents">
+  <f-popup v-on:confirm-popup="confirmStudent" v-on:open-popup="afterOpenPopup" v-bind:sync-data-of-components="syncDataOfComponents.syncDataWithComponentPopup">
     <div slot="header" >
       <h5>Delete student {{selectedStudent.id}}</h5>
     </div>
@@ -14,7 +14,7 @@ export default {
   name: "f-delete-student",
   props: {
     syncDataOfComponents: {
-      showPopup: false
+      syncDataWithComponentPopup: {}
     },
     selectedStudent: {
       type: Object,

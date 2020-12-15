@@ -10,10 +10,8 @@ function App() {
       <Provider store={store()}>
           <Router>
               <Switch>
-                  <Route exact path="/" render={(props) => (<FunctionList {...props}  />) } />
-                  <Route path="/student">
-                      <Student />
-                  </Route>
+                  <Route exact path="/" render={(props) => (<FunctionList {...props} />) } />
+                  <Route path="/student" render={(props) => {return (<Student history={props.history} />)} } />
               </Switch>
           </Router>
       </Provider>

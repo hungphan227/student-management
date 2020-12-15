@@ -1,5 +1,5 @@
 <template>
-  <f-popup v-on:confirm-popup="confirmStudent" v-bind:sync-data-of-components="syncDataOfComponents">
+  <f-popup v-on:confirm-popup="confirmStudent" v-bind:sync-data-of-components="syncDataOfComponents.syncDataWithComponentPopup">
     <div slot="header">
       <h5>Create Student</h5>
     </div>
@@ -19,7 +19,7 @@ export default {
   name: "f-create-student",
   props: {
     syncDataOfComponents: {
-      showPopup: false
+      syncDataWithComponentPopup: {}
     },
     afterClosePopupCreateStudent: {
       type: Function,

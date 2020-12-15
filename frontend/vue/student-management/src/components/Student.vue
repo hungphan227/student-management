@@ -28,16 +28,23 @@ export default {
   data () {
     return {
       syncDataWithComponentCreateStudent: {
-        showPopup: false
+        syncDataWithComponentPopup: {
+          requestRerender: 0,
+          showPopup: false
+        }
       },
       syncDataWithComponentEditStudent: {
-        showPopup: false
+        syncDataWithComponentPopup: {
+          requestRerender: 0,
+          showPopup: false
+        }
       },
       syncDataWithComponentDeleteStudent: {
-        showPopup: false
+        syncDataWithComponentPopup: {
+          requestRerender: 0,
+          showPopup: false
+        }
       },
-      showPopupCreateStudent: false,
-      showPopupEditStudent: false,
       fields: ['id', 'name', 'age', 'action'],
       selectedStudent: {
         id: 0,
@@ -53,16 +60,19 @@ export default {
   },
   methods: {
     popupAddStudent () {
-      this.syncDataWithComponentCreateStudent.showPopup = true
+      this.syncDataWithComponentCreateStudent.syncDataWithComponentPopup.showPopup = true
+      this.syncDataWithComponentCreateStudent.syncDataWithComponentPopup.requestRerender++
     },
     afterClosePopupCreateStudent () {
     },
     popupEditStudent (student) {
-      this.syncDataWithComponentEditStudent.showPopup = true
+      this.syncDataWithComponentEditStudent.syncDataWithComponentPopup.showPopup = true
+      this.syncDataWithComponentEditStudent.syncDataWithComponentPopup.requestRerender++
       this.selectedStudent = student
     },
     popupDeleteStudent (student) {
-      this.syncDataWithComponentDeleteStudent.showPopup = true
+      this.syncDataWithComponentDeleteStudent.syncDataWithComponentPopup.showPopup = true
+      this.syncDataWithComponentDeleteStudent.syncDataWithComponentPopup.requestRerender++
       this.selectedStudent = student
     },
     afterClosePopupEditStudent () {

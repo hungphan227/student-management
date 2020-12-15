@@ -4,6 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/student.css';
 
 class FunctionList extends React.Component {
+
+    constructor(props) {
+        console.log('construct FunctionList')
+        super(props)
+    }
+
     render() {
         return (
             <div>

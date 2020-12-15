@@ -1,4 +1,4 @@
-import {GET_STUDENTS, CREATE_STUDENT} from "./Actions";
+import {GET_STUDENTS, CREATE_STUDENT, EDIT_STUDENT, DELETE_STUDENT} from "./Actions";
 
 export const studentReducer = (state = [], action) => {
     console.log('reducers')
@@ -11,12 +11,24 @@ export const studentReducer = (state = [], action) => {
             return state
         }
         case CREATE_STUDENT: {
-            const { text } = action
-            const newTodo = {
-                text,
-                isCompleted: false
-            }
-            return state.concat(newTodo)
+            const { student } = action
+            return [...state, student]
+        }
+        case EDIT_STUDENT: {
+            const { student } = action
+            let index = state.findIndex(function findById(curStudent) {
+                return student.id === curStudent.id
+            })
+            state.splice(index, 1, student)
+            return [...state]
+        }
+        case DELETE_STUDENT: {
+            const { studentId } = action
+            let index = state.findIndex(function findById(curStudent) {
+                return studentId === curStudent.id
+            })
+            state.splice(index, 1)
+            return [...state]
         }
         default:
             return state
