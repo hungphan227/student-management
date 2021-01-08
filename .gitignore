@@ -20,9 +20,10 @@ node_modules/
 */**/version.txt
 /ui/target/
 
-#eclpise
+#eclipse
 .project
 .settings
+backend/.classpath
 .classpathversion.txt
 version.txt
 npm
@@ -46,4 +47,4 @@ nbactions.xml
 nb-configuration.xml
 
 */**/target/
-engine/src/main/resources/application.local1.conf
+backend/src/main/resources/public/

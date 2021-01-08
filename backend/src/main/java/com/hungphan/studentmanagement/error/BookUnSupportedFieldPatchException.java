@@ -1,4 +1,4 @@
-package com.mkyong.error;
+package com.hungphan.studentmanagement.error;
 
 import java.util.Set;
 

@@ -5,21 +5,23 @@ export const DELETE_STUDENT = 'DELETE_STUDENT'
 
 export function getStudents () {
     return function(dispatch) {
+        console.log('action get student')
         return fetch("/student", {
             method: 'GET'
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
+        }).then(res => {
+            if (res.status === 200) {
+                res.json().then(data => {
                     dispatch({
                         type: GET_STUDENTS,
-                        students: result
-                    });
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+                        students: data
+                    })
+                })
+            } else {
+                console.log('Error with status ' + res.status)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
 
@@ -34,19 +36,20 @@ export function createStudents (student) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(student)
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
+        }).then(res => {
+            if (res.status === 201) {
+                res.json().then(data => {
                     dispatch({
                         type: CREATE_STUDENT,
-                        student: result
-                    });
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+                        student: data
+                    })
+                })
+            } else {
+                console.log('Error with status ' + res.status)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
 
@@ -61,19 +64,20 @@ export function editStudent (student) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(student)
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
+        }).then(res => {
+            if (res.status === 200) {
+                res.json().then(data => {
                     dispatch({
                         type: EDIT_STUDENT,
-                        student: result
-                    });
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+                        student: data
+                    })
+                })
+            } else {
+                console.log('Error with status ' + res.status)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
 
@@ -83,18 +87,17 @@ export function deleteStudent (student) {
         console.log(student.id)
         return fetch("/student/"+student.id, {
             method: 'DELETE'
+        }).then(res => {
+            if (res.status === 200) {
+                dispatch({
+                    type: DELETE_STUDENT,
+                    studentId: student.id
+                })
+            } else {
+                console.log('Error with status ' + res.status)
+            }
+        }).catch(error => {
+            console.log(error)
         })
-            .then(res => res.text())
-            .then(
-                (result) => {
-                    dispatch({
-                        type: DELETE_STUDENT,
-                        studentId: student.id
-                    });
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
     }
 }

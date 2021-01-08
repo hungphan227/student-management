@@ -1,35 +1,39 @@
-package com.mkyong;
+package com.hungphan.studentmanagement.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import java.math.BigDecimal;
 
 @Entity
-public class Book {
+public class Student {
 
     @Id
-    @GeneratedValue
+    @Column(name = "ID")
+    @GeneratedValue(generator = "STUDENT_GEN", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "STUDENT_GEN", sequenceName = "STUDENT_SEQ", allocationSize = 1)
     private Long id;
+    
     private String name;
-    private String author;
-    private BigDecimal price;
+    private Integer age;
 
     // avoid this "No default constructor for entity"
-    public Book() {
+    public Student() {
     }
 
-    public Book(Long id, String name, String author, BigDecimal price) {
+    public Student(Long id, String name, Integer age) {
         this.id = id;
         this.name = name;
-        this.author = author;
-        this.price = price;
+        this.age = age;
     }
 
-    public Book(String name, String author, BigDecimal price) {
+    public Student(String name, Integer age) {
         this.name = name;
-        this.author = author;
-        this.price = price;
+        this.age = age;
     }
 
     public Long getId() {
@@ -48,20 +52,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getAuthor() {
-        return author;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
@@ -69,8 +65,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", price=" + price +
+                ", age='" + age +
                 '}';
     }
 

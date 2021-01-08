@@ -1,9 +1,12 @@
-package com.mkyong;
+package com.hungphan.studentmanagement.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import com.hungphan.studentmanagement.model.Student;
+import com.hungphan.studentmanagement.repository.StudentRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ public class StudentController {
     // Find
     @GetMapping("/student")
     List<Student> findAll() {
+        System.out.println("Final all students");
         return repository.findAll();
     }
 

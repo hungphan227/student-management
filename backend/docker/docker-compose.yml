@@ -1,0 +1,37 @@
+version: '3'
+services:
+  student-management:
+    image: student-management
+    environment:
+     - JAVA_OPTS=-Xmx512m -Xms128m
+     - "TZ=Asia/Ho_Chi_Minh"
+    volumes:
+      - /home/hung/data/docker/docker-data/log/student-management:/var/log/student-management
+    ports:
+      - "9999:9999"
+    extra_hosts:
+      - "dbserver:192.168.204.129"
+    networks:
+      student-management-network:
+        aliases:
+          - student-mngm-server
+    deploy:
+      mode: replicated
+      replicas: 1
+  chat-service:
+    image: chat-service
+    environment:
+     - JAVA_OPTS=-Xmx512m -Xms128m
+     - "TZ=Asia/Ho_Chi_Minh"
+    volumes:
+      - /home/hung/data/docker/docker-data/log/chat-service:/var/log/chat-service
+    deploy:
+      mode: replicated
+      replicas: 1 
+    networks:
+      student-management-network:
+        aliases:
+          - chat-server
+networks:
+  student-management-network:
+    external: true
